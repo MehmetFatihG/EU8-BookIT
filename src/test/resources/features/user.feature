@@ -13,7 +13,7 @@ Feature: User Verification
     When I get the current user information from api
     Then the information about current user from api and database should match
 
-  @db @ui
+  @db
   Scenario: three point verification (UI,API,Database)
     Given user logs in using "wcanadinea@ihg.com" "waverleycanadine"
     And  user is on the my self page
@@ -21,15 +21,15 @@ Feature: User Verification
     When I get the current user information from api
     Then UI,API and Database user information must be match
 
-  @db @ui
-  Scenario Outline: three point verification (UI,API,Database) DDT
+  @db
+  Scenario Outline: three point verification (UI,API,Database)
     Given user logs in using "<email>" "<password>"
     And  user is on the my self page
     Given I logged Bookit api using "<email>" and "<password>"
     When I get the current user information from api
     Then UI,API and Database user information must be match
-
     Examples:
-      | email              | password         |
-      | wcanadinea@ihg.com | waverleycanadine |
-      #| nshearsby7w@uiuc.edu | lorettebradnum |
+      | email                        | password         |
+      | wcanadinea@ihg.com           | waverleycanadine |
+      | teacherilsamnickel@gmail.com | samnickel        |
+      | nshearsby7w@uiuc.edu         | lorettebradnum   |
