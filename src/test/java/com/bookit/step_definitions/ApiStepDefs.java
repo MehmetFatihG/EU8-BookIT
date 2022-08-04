@@ -4,6 +4,7 @@ import com.bookit.pages.SelfPage;
 import com.bookit.utilities.BookItApiUtil;
 import com.bookit.utilities.ConfigurationReader;
 import com.bookit.utilities.DBUtils;
+import com.bookit.utilities.Environment;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,7 +37,7 @@ public class ApiStepDefs {
                 .and()
                 .header("Authorization", accessToken)
                 .when()
-                .get(ConfigurationReader.get("qa2apiUrl") + "/api/users/me");
+                .get(Environment.BASE_URL + "/api/users/me");
 
     }
     @Then("status code should be {int}")
@@ -124,7 +125,7 @@ public class ApiStepDefs {
         studentPassword = studentInfo.get("password");
          response = RestAssured.given().accept(ContentType.JSON)
                 .queryParams(studentInfo).header("Authorization", accessToken)
-                .when().post(ConfigurationReader.get("qa2apiUrl") + path);
+                .when().post(Environment.BASE_URL + path);
 
     }
 
@@ -133,6 +134,13 @@ public class ApiStepDefs {
 
         //we create a method to delete one student
         BookItApiUtil.deleteStudent(studentEmail,studentPassword);
+
+    }
+
+    @Given("I logged Bookit api using as a {string}")
+    public void ıLoggedBookitApiUsingAsA(String role) {
+
+        accessToken = BookItApiUtil.getTokenByRole(role);
 
     }
 }

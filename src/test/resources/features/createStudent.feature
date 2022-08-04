@@ -1,11 +1,11 @@
 Feature: Create student
-  @wip
+
   Scenario: Create student a teacher and verify status code 201
-    Given I logged Bookit api using "teacherilsamnickel@gmail.com" and "samnickel"
+    Given I logged Bookit api using "teacheriljanettebaskett@gmail.com" and "janettebaskett"
     When I send POST request to "/api/students/student" endpoint with following information
       | first-name      | harold                  |
       | last-name       | finch                   |
-      | email           | haroldfinch34@gmail.com |
+      | email           | haroldfinch222@gmail.com |
       | password        | abc123                  |
       | role            | student-team-leader     |
       | campus-location | VA                      |
@@ -13,4 +13,20 @@ Feature: Create student
       | team-name       | Nukes                   |
     Then status code should be 201
     And I delete previously added student
+  @wip
+  Scenario: test config
+    Given I get env properties
 
+  Scenario: Create student a teacher and verify status code 201
+    Given I logged Bookit api using as a "teacher"
+    When I send POST request to "/api/students/student" endpoint with following information
+      | first-name      | harold                  |
+      | last-name       | finch                   |
+      | email           | haroldfinch222@gmail.com |
+      | password        | abc123                  |
+      | role            | student-team-leader     |
+      | campus-location | VA                      |
+      | batch-number    | 8                       |
+      | team-name       | Nukes                   |
+    Then status code should be 201
+    And I delete previously added student
